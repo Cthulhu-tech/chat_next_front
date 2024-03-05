@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
       </AccessComponent>,
       children: [
         {
-          path: ':id',
+          path: ':chatId',
           element: <ChatComponent/>
         }
       ],

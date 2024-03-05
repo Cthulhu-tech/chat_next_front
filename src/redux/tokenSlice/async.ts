@@ -1,12 +1,15 @@
 import { ActionReducerMapBuilder, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
 import { FormError } from "../type";
-import { TokenAccess, TokenSliceType } from "./type";
+import { DecodeTokenType, TokenAccess, TokenSliceType } from "./type";
+import { jwtDecode } from "jwt-decode";
 
 export const extraReducers = (builder: ActionReducerMapBuilder<TokenSliceType>) => {
   builder.addCase(refreshToken.fulfilled, (state, { payload }) => {
-    if(payload) {
+    if(payload && payload.access) {
       state.token = payload.access;
+      const decodeToken = jwtDecode<DecodeTokenType>(payload.access);
+      state.decodeData = decodeToken;
     } else {
       state.token = null;
     }

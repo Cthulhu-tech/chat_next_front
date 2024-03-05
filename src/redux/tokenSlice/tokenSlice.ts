@@ -8,6 +8,7 @@ export const tokenSlice = createSlice({
   initialState: {
     token: null,
     loading: true,
+    decodeData: null,
   } as TokenSliceType,
   reducers: {
     setToken: (state, action: PayloadType<string>) => {
