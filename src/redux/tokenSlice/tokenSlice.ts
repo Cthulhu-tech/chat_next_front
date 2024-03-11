@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { TokenSliceType } from './type';
+import { DecodeTokenType, TokenSliceType } from './type';
 import { PayloadType } from '../type';
 import { extraReducers } from './async';
+import { jwtDecode } from 'jwt-decode';
 
 export const tokenSlice = createSlice({
   name: 'token',
@@ -13,6 +14,8 @@ export const tokenSlice = createSlice({
   reducers: {
     setToken: (state, action: PayloadType<string>) => {
       state.token = action.payload;
+      const decodeToken = jwtDecode<DecodeTokenType>(action.payload);
+      state.decodeData = decodeToken;
     },
     deleteToken: (state) => {
       state.token = null;

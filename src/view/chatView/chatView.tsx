@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { StoreDispatch, StoreType } from "../../redux/type";
-import { TokenSliceType } from "../../redux/tokenSlice/type";
+import { DecodeUserTokenType } from "../../redux/tokenSlice/type";
 import { ChatCreate } from "./chatCreate/chatCreate";
 import { getChats } from "../../redux/chatDataSlice/async";
 import { ChatList } from "./chatList/chatList";
@@ -11,19 +11,19 @@ import { Outlet } from "react-router";
 export const ChatView = () => {
 
     const dispatch = useDispatch<StoreDispatch>();
-    const tokenDataStore = useSelector<StoreType, TokenSliceType>((value) => value.token);
+    const decodeUserToken = useSelector<StoreType, DecodeUserTokenType | undefined>((value) => value.token.decodeData?.data);
     useLayoutEffect(() => {
-        dispatch(getChats());
+        dispatch(getChats())
     }, []);
 
     useEffect(() => {
-        if(tokenDataStore.decodeData) {
+        if(decodeUserToken) {
             socket.connect();
         }
         return () => {
             socket.close();
         }
-    }, []);
+    }, [decodeUserToken]);
 
     return <div className="wrapper-app">
     <aside>

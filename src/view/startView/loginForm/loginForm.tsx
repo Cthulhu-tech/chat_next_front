@@ -12,9 +12,10 @@ import { TokenAccess } from "../../../redux/tokenSlice/type";
 import { LoginFormType } from "../../../redux/loginFormSlice/type";
 import { setValueInLoginForm } from "../../../redux/loginFormSlice/loginFormSlice";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const LoginForm = () => {
-
+    const navigate = useNavigate();
     const [formDisabled, setFormDisabled] = useState(false);
     const loginDataStore = useSelector<StoreType, LoginFormType>((value) => value.login_form);
     const dispatch = useDispatch<StoreDispatch>();
@@ -34,6 +35,8 @@ export const LoginForm = () => {
             if(data.payload && (data.payload as TokenAccess)?.access) {
                 dispatch(setToken((data.payload as TokenAccess).access as string));
             }
+        }).then(() => {
+            navigate("/chat");
         }).finally(() => setFormDisabled(() => false));
     }
     

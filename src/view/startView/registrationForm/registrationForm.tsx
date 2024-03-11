@@ -9,9 +9,9 @@ import { useState } from "react";
 import { ErrorMessage } from "../../../components/ui/errorMessage/errorMessage";
 import { createUser } from "../../../redux/registrationFormSlice/async";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const RegistrationForm = () => {
-
     const [formDisabled, setFormDisabled] = useState(false);
     const registrationDataStore = useSelector<StoreType, RegistrationFormType>((value) => value.registration_form);
     const dispatch = useDispatch<StoreDispatch>();
@@ -20,14 +20,18 @@ export const RegistrationForm = () => {
             name,
             value,
         }));
-
+    const navigate = useNavigate();
     const formRegistrationHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setFormDisabled(() => true);
         dispatch(createUser({
             login: registrationDataStore.login,
             password: registrationDataStore.password
-        })).finally(() => setFormDisabled(() => false));
+        }))
+        .then(() => {
+            navigate("/login");
+        })
+        .finally(() => setFormDisabled(() => false));
     }
     
     return <div className="flex flex-col h-dvh w-full items-center justify-center">

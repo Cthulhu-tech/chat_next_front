@@ -10,7 +10,6 @@ export const AccessComponent = ({ children }: ChildComponent) => {
     
     const dispatch = useDispatch<StoreDispatch>();
     const tokenDataStore = useSelector<StoreType, TokenSliceType>((value) => value.token);
-    
     useLayoutEffect(() => {
         if(
             !tokenDataStore.token &&
