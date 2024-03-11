@@ -1,7 +1,7 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import { StartView } from '../view/startView/startView';
 import { ChatView } from '../view/chatView/chatView';
-import { ChatComponent } from '../components/chatComponent/chatComponent';
+import ChatComponentMemo from '../components/chatComponent/chatComponent';
 import { AccessComponent } from '../components/accessComponentsGroup/accessComponent/accessComponent';
 import { LoginForm } from '../view/startView/loginForm/loginForm';
 import { RegistrationForm } from '../view/startView/registrationForm/registrationForm';
@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
       children: [
         {
           path: ':chatId',
-          element: <ChatComponent/>
+          element: <ChatComponentMemo/>
         }
       ],
     },

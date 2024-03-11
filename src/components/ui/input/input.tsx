@@ -15,8 +15,6 @@ export const Input = ({
 
     const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) =>
         setInputValue(() => event.target.value);
-    // Cannot update a component (`RegistrationForm`) while rendering a different component (`Input`).
-    // To locate the bad setState() call inside `Input`, follow the stack 
     useEffect(() => {
         callback({
             name,

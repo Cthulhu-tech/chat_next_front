@@ -8,7 +8,6 @@ export const MessagesComponent = () => {
 
     const { chatId } = useParams();
     const messageData = useSelector<StoreType, Record<string, MessagesChatType>>((state) => state.message_data.messageData);
-    console.log(messageData)
     if(!chatId || !messageData[chatId])
     return <></>
     return <div className="w-full">

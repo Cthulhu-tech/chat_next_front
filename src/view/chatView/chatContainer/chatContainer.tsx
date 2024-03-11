@@ -7,30 +7,21 @@ import { StoreType } from "../../../redux/type";
 
 const ChatContainer = ({ id, name }: ChatType) => {
     const socket = useContext(SocketContext);
-    const userLogin = useSelector<StoreType, string | undefined>((data) => data.token.decodeData?.data.login)
+    const userLogin = useSelector<StoreType, string | undefined>((data) => data.token.decodeData?.data.login);
     useEffect(() => {
-        console.log(123)
         if(userLogin) {
             socket.emit('joinChat', {
-                user: userLogin,
+                login: userLogin,
                 id,
             });
             socket.emit('getMessages', {
-                user: userLogin,
+                login: userLogin,
                 id,
             });
         }
-
-        socket.on('joinChat', (data: any) => {
-            console.log(data, id)
-        });
-
-        socket.on('getMessages', (data: any) => {
-            console.log(data, id)
-        });
-
         return () => {
             socket.off('joinChat');
+            socket.off('getMessages');
         }
     }, []);
 

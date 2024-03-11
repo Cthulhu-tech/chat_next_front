@@ -7,3 +7,19 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+aside {
+    width: 100%;
+    height: max(100vh, 100vh);
+}
+
+main > div {
+    overflow: auto;
+    height: max(calc(100vh - 112px), calc(100vh - 112px))
+}
+
+.wrapper-app {
+    gap: 20px;
+    display: grid;
+    grid-template-columns: minmax(100px, 300px) 1fr;
+}

@@ -23,7 +23,7 @@ export const chatDataSlice = createSlice({
         state,
         action: PayloadType<number>
     ) => {
-      return {...state, data: state.data.filter((chat: any) => chat.id !== action.payload)};
+      return {...state, data: state.data.filter((chat) => chat.id !== action.payload)};
     },
     setValueInChatCreateForm: (
       state,

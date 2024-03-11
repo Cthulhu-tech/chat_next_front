@@ -6,6 +6,7 @@ import { ChatCreate } from "./chatCreate/chatCreate";
 import { getChats } from "../../redux/chatDataSlice/async";
 import { ChatList } from "./chatList/chatList";
 import { SocketContext, socket } from "../../context/socketContext";
+import { Outlet } from "react-router";
 
 export const ChatView = () => {
 
@@ -24,12 +25,15 @@ export const ChatView = () => {
         }
     }, []);
 
-    return <aside id="sidebar-multi-level-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-        <ChatCreate/>
-        <SocketContext.Provider value={socket}>
-           <ChatList/> 
-        </SocketContext.Provider>
-       </div>
+    return <div className="wrapper-app">
+    <aside>
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <ChatCreate/>
+            <SocketContext.Provider value={socket}>
+                <ChatList/> 
+            </SocketContext.Provider>
+        </div>
     </aside>
+    <Outlet/>
+    </div>
 }
